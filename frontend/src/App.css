@@ -1,34 +1,297 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.App {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+* {
+  box-sizing: border-box;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
-.App-link {
-    color: #61dafb;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Card hover effects */
+.hover\:shadow-lg:hover {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Button hover enhancements */
+button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+/* Glass morphism effects */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+/* Enhanced focus states */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: rgb(59, 130, 246);
+}
+
+/* Loading animation */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Status indicators */
+.status-online {
+  background: linear-gradient(45deg, #10b981, #059669);
+  animation: pulse 2s infinite;
+}
+
+.status-offline {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+.status-error {
+  background: linear-gradient(45deg, #f59e0b, #d97706);
+  animation: pulse 1s infinite;
+}
+
+/* Switch component enhancements */
+[data-state="checked"] {
+  background: linear-gradient(45deg, #3b82f6, #2563eb);
+}
+
+/* Card entrance animations */
+.card-enter {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  
+  .max-w-7xl {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Tab animations */
+[data-state="active"] {
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Notification styles */
+.notification-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Tooltip enhancements */
+[role="tooltip"] {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Enhanced backdrop effects */
+.bg-white\/70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bg-white\/80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Progress indicators */
+.progress-bar {
+  transition: width 0.3s ease-in-out;
+}
+
+/* Interactive elements */
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Status badge animations */
+.badge-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Connection status indicator */
+.connection-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.connection-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.connection-indicator.connected::before {
+  left: 100%;
+}
+
+/* Device control animations */
+.device-control {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.device-control:hover {
+  transform: scale(1.02);
+}
+
+/* Schedule item animations */
+.schedule-item {
+  transition: all 0.2s ease-out;
+}
+
+.schedule-item:hover {
+  transform: translateX(4px);
+}
+
+/* Log entry styling */
+.log-entry {
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s ease-out;
+}
+
+.log-entry:hover {
+  border-color: rgb(59, 130, 246);
+  background-color: rgba(59, 130, 246, 0.02);
+}
+
+/* Stats card enhancements */
+.stats-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced gradients */
+.gradient-blue {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.gradient-purple {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.gradient-orange {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Modern form elements */
+input[type="time"] {
+  appearance: none;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: opacity(0.7);
+}
+
+/* Enhanced switch styling */
+button[role="switch"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button[role="switch"]:hover {
+  box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.1);
 }
